@@ -91,19 +91,19 @@
   ],
   "Item": [
     {
-      "name": "pizza 1",
-      "price": 30,
-      "img": "user.jpg",
-      "subgroup": "Pizza",
+      "name": "Beef Pepperoni",
+      "price": "60",
+      "img": "Beef Pepperoni.png",
+      "subgroup": "Pizaa",
       "group": "Food",
       "menu": "Ramadan",
       "branch": "Cairo",
       "id": 1
     },
     {
-      "name": "pizza2",
-      "price": "60",
-      "img": "Beef Pepperoni.png",
+      "name": "Chicken-Tikka",
+      "price": "50",
+      "img": "Chicken-Tikka.png",
       "subgroup": "Pizaa",
       "group": "Food",
       "menu": "Ramadan",
@@ -111,24 +111,34 @@
       "id": 2
     },
     {
-      "name": "pizza3",
-      "price": "50",
-      "img": "Mia Pasta.png",
-      "subgroup": "Pizaa",
-      "group": "Food",
+      "name": "American coffee",
+      "price": "40",
+      "img": "American coffee.png",
+      "subgroup": "Hot Drinks",
+      "group": "BAV",
       "menu": "Ramadan",
       "branch": "Cairo",
       "id": 3
     },
     {
-      "name": "pizza4",
-      "price": "65",
-      "img": "Chicken-Tikka.png",
-      "subgroup": "Pizaa",
-      "group": "Food",
+      "name": "Mocha",
+      "price": "30",
+      "img": "Mocha.png",
+      "subgroup": "Hot Drinks",
+      "group": "BAV",
       "menu": "Ramadan",
       "branch": "Cairo",
       "id": 4
+    },
+    {
+      "name": "beef burger",
+      "price": "30",
+      "img": "beef burger.png",
+      "subgroup": "Burger",
+      "group": "Food",
+      "menu": "Ramadan",
+      "branch": "Cairo",
+      "id": 5
     }
   ]
 }

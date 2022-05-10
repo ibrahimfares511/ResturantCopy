@@ -3,123 +3,149 @@
     <div class="container">
       <h2 class="title">Item</h2>
       <div class="row">
-        <div class="col-md-6 offset-md-3">
-          <!-- Brnach -->
-          <select
-            class="form-select mb-3"
-            v-model="selectBranch"
-            @change="
-              getAllMenus({ branchName: selectBranch }),
-                getAllGroups({
-                  branchName: selectBranch,
-                  menuName: selectMenu,
-                }),
-                getAllSubGroups({
-                  branchName: selectBranch,
-                  menuName: selectMenu,
-                  groupName: selectGroup,
-                })
-            "
-          >
-            <option disabled value="">Please select Branch</option>
-            <option
-              v-for="(branch, i) in allBranches"
-              :key="i"
-              :value="branch.name"
-            >
-              {{ branch.name }}
-            </option>
-          </select>
-          <!-- Menu -->
-          <select
-            class="form-select mb-3"
-            v-model="selectMenu"
-            @change="
-              getAllGroups({ branchName: selectBranch, menuName: selectMenu }),
-                getAllSubGroups({
-                  branchName: selectBranch,
-                  menuName: selectMenu,
-                  groupName: selectGroup,
-                })
-            "
-          >
-            <option disabled value="">Please select Menu</option>
-            <option v-for="(menu, i) in allMenus" :key="i" :value="menu.name">
-              {{ menu.name }}
-            </option>
-          </select>
-          <!-- Group -->
-          <select
-            class="form-select mb-3"
-            v-model="selectGroup"
-            @change="
-              getAllSubGroups({
-                branchName: selectBranch,
-                menuName: selectMenu,
-                groupName: selectGroup,
-              })
-            "
-          >
-            <option disabled value="">Please select Group</option>
-            <option
-              v-for="(group, i) in allGroups"
-              :key="i"
-              :value="group.name"
-            >
-              {{ group.name }}
-            </option>
-          </select>
-          <!-- SubGroup -->
-          <select class="form-select mb-3" v-model="selectSubGroup">
-            <option disabled value="">Please select SubGroup</option>
-            <option
-              v-for="(subgroup, i) in allSubGroups"
-              :key="i"
-              :value="subgroup.name"
-            >
-              {{ subgroup.name }}
-            </option>
-          </select>
-          <!-- Item Name -->
-          <div class="form-group">
-            <label for="item-name">Item Name</label>
-            <input
-              type="text"
-              class="form-control"
-              id="item-name"
-              placeholder="Enter Item Name Please"
-              v-model="itemName"
-            />
-          </div>
-          <!-- Item Price -->
-          <div class="form-group">
-            <label for="item-price">Item Price</label>
-            <input
-              type="text"
-              class="form-control"
-              id="item-price"
-              placeholder="Enter Item Price Please"
-              v-model="itemPrice"
-            />
-          </div>
-          <!-- Item Image -->
-          <div class="form-group">
-            <label for="item-image">Item Img</label>
-            <input
-              type="file"
-              accept="image/*"
-              @change="uploadImage($event)"
-              id="item-image"
-            />
-          </div>
-          <div class="d-grid mt-3">
-            <button class="btn btn-success" @click="saveItem()">Save</button>
+        <div class="col-md-8 offset-md-2">
+          <div class="row align-items-center">
+            <div class="col-md-6">
+              <!-- Brnach -->
+              <select
+                class="form-select mb-3"
+                v-model="selectBranch"
+                @change="
+                  getAllMenus({ branchName: selectBranch }),
+                    getAllGroups({
+                      branchName: selectBranch,
+                      menuName: selectMenu,
+                    }),
+                    getAllSubGroups({
+                      branchName: selectBranch,
+                      menuName: selectMenu,
+                      groupName: selectGroup,
+                    })
+                "
+              >
+                <option disabled value="">Please select Branch</option>
+                <option
+                  v-for="(branch, i) in allBranches"
+                  :key="i"
+                  :value="branch.name"
+                >
+                  {{ branch.name }}
+                </option>
+              </select>
+              <!-- Menu -->
+              <select
+                class="form-select mb-3"
+                v-model="selectMenu"
+                @change="
+                  getAllGroups({
+                    branchName: selectBranch,
+                    menuName: selectMenu,
+                  }),
+                    getAllSubGroups({
+                      branchName: selectBranch,
+                      menuName: selectMenu,
+                      groupName: selectGroup,
+                    })
+                "
+              >
+                <option disabled value="">Please select Menu</option>
+                <option
+                  v-for="(menu, i) in allMenus"
+                  :key="i"
+                  :value="menu.name"
+                >
+                  {{ menu.name }}
+                </option>
+              </select>
+              <!-- Group -->
+              <select
+                class="form-select mb-3"
+                v-model="selectGroup"
+                @change="
+                  getAllSubGroups({
+                    branchName: selectBranch,
+                    menuName: selectMenu,
+                    groupName: selectGroup,
+                  })
+                "
+              >
+                <option disabled value="">Please select Group</option>
+                <option
+                  v-for="(group, i) in allGroups"
+                  :key="i"
+                  :value="group.name"
+                >
+                  {{ group.name }}
+                </option>
+              </select>
+              <!-- SubGroup -->
+              <select
+                class="form-select mb-3"
+                v-model="selectSubGroup"
+                @change="getItems()"
+              >
+                <option disabled value="">Please select SubGroup</option>
+                <option
+                  v-for="(subgroup, i) in allSubGroups"
+                  :key="i"
+                  :value="subgroup.name"
+                >
+                  {{ subgroup.name }}
+                </option>
+              </select>
+              <!-- Item Name -->
+              <div class="form-group">
+                <label for="item-name">Item Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="item-name"
+                  placeholder="Enter Item Name Please"
+                  v-model="itemName"
+                />
+              </div>
+              <!-- Item Price -->
+              <div class="form-group">
+                <label for="item-price">Item Price</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="item-price"
+                  placeholder="Enter Item Price Please"
+                  v-model="itemPrice"
+                />
+              </div>
+            </div>
+            <div class="col-md-6">
+              <!-- Item Image -->
+              <div class="form-group text-center mt-3">
+                <input
+                  type="file"
+                  accept="image/*"
+                  @change="uploadImage($event)"
+                  id="item-image"
+                  class="d-none"
+                />
+                <label
+                  for="item-image"
+                  class="label-img"
+                  :class="[pathImg != null ? 'fill' : '']"
+                  :style="{
+                    'background-image': `url(${pathImg})`,
+                  }"
+                ></label>
+              </div>
+            </div>
+            <div class="d-grid mt-3">
+              <button class="btn btn-success" @click="saveItem()">Save</button>
+            </div>
           </div>
           <!-- <table class="table text-center mt-4 shadow">
             <thead class="table-dark">
               <tr>
                 <th>ID</th>
-                <th>SubGroup</th>
+                <th>Name</th>
+                <th>Price</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -182,6 +208,7 @@ export default {
       itemName: "",
       itemPrice: "",
       itemImg: "",
+      pathImg: null,
       editBtn: null,
     };
   },
@@ -197,12 +224,11 @@ export default {
     ]),
     uploadImage(e) {
       const image = e.target.files[0];
-      // const reader = new FileReader();
-      // reader.readAsDataURL(image);
-      // reader.onload = (e) => {
-      //   this.previewImage = e.target.result;
-      //   console.log(this.previewImage);
-      // };
+      const reader = new FileReader();
+      reader.readAsDataURL(image);
+      reader.onload = (e) => {
+        this.pathImg = e.target.result;
+      };
       this.itemImg = image.name;
     },
     async saveItem() {
@@ -227,6 +253,7 @@ export default {
         if (result.status === 201) {
           this.itemName = "";
           this.itemPrice = "";
+          this.pathImg = null;
           document.getElementById("item-image").value = "";
           this.$swal({
             position: "center-center",
@@ -243,6 +270,12 @@ export default {
           title: "Please Enter Your Full Data",
         });
       }
+    },
+    async getItems() {
+      let result = await axios.get(
+        `http://localhost:3000/Item?branch=${this.selectBranch}&menu=${this.selectMenu}&subgroup=${this.selectSubGroup}`
+      );
+      console.log(result);
     },
     // changeEdit(index) {
     //   this.editBtn = index;
@@ -312,4 +345,29 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.label-img {
+  width: 200px;
+  height: 200px;
+  border: 1px solid #ddd;
+  position: relative;
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+.label-img::after {
+  content: "+";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-size: 5em;
+  text-align: center;
+  color: #ddd;
+}
+.label-img.fill::after {
+  content: "";
+}
+</style>
