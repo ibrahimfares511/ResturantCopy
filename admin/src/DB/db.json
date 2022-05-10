@@ -1,0 +1,134 @@
+{
+  "branch": [
+    {
+      "name": "Cairo",
+      "id": 1
+    },
+    {
+      "name": "Zagazig",
+      "id": 2
+    },
+    {
+      "name": "Tanta",
+      "id": 3
+    },
+    {
+      "name": "Alexandria",
+      "id": 4
+    }
+  ],
+  "menu": [
+    {
+      "name": "Ramadan",
+      "branch": "Cairo",
+      "id": 1
+    },
+    {
+      "name": "Main",
+      "branch": "Cairo",
+      "id": 2
+    },
+    {
+      "name": "el3ed",
+      "branch": "Cairo",
+      "id": 3
+    },
+    {
+      "name": "Cocktail",
+      "branch": "Zagazig",
+      "id": 4
+    }
+  ],
+  "group": [
+    {
+      "name": "Food",
+      "menu": "Ramadan",
+      "branch": "Cairo",
+      "id": 1
+    },
+    {
+      "name": "BAV",
+      "menu": "Ramadan",
+      "branch": "Cairo",
+      "id": 2
+    },
+    {
+      "name": "SHISHA",
+      "menu": "Ramadan",
+      "branch": "Cairo",
+      "id": 3
+    }
+  ],
+  "subgroup": [
+    {
+      "name": "Pizaa",
+      "group": "Food",
+      "menu": "Ramadan",
+      "branch": "Cairo",
+      "id": 1
+    },
+    {
+      "name": "Burger",
+      "group": "Food",
+      "menu": "Ramadan",
+      "branch": "Cairo",
+      "id": 2
+    },
+    {
+      "name": "Hot Drinks",
+      "group": "BAV",
+      "menu": "Ramadan",
+      "branch": "Cairo",
+      "id": 3
+    },
+    {
+      "name": "Cold Drinks",
+      "group": "BAV",
+      "menu": "Ramadan",
+      "branch": "Cairo",
+      "id": 4
+    }
+  ],
+  "Item": [
+    {
+      "name": "pizza 1",
+      "price": 30,
+      "img": "user.jpg",
+      "subgroup": "Pizza",
+      "group": "Food",
+      "menu": "Ramadan",
+      "branch": "Cairo",
+      "id": 1
+    },
+    {
+      "name": "pizza2",
+      "price": "60",
+      "img": "Beef Pepperoni.png",
+      "subgroup": "Pizaa",
+      "group": "Food",
+      "menu": "Ramadan",
+      "branch": "Cairo",
+      "id": 2
+    },
+    {
+      "name": "pizza3",
+      "price": "50",
+      "img": "Mia Pasta.png",
+      "subgroup": "Pizaa",
+      "group": "Food",
+      "menu": "Ramadan",
+      "branch": "Cairo",
+      "id": 3
+    },
+    {
+      "name": "pizza4",
+      "price": "65",
+      "img": "Chicken-Tikka.png",
+      "subgroup": "Pizaa",
+      "group": "Food",
+      "menu": "Ramadan",
+      "branch": "Cairo",
+      "id": 4
+    }
+  ]
+}
