@@ -91,7 +91,7 @@
   ],
   "Item": [
     {
-      "name": "Beef Pepperoni",
+      "name": "Beef  Pepperoni",
       "price": "60",
       "img": "Beef Pepperoni.png",
       "subgroup": "Pizaa",
@@ -139,6 +139,56 @@
       "menu": "Ramadan",
       "branch": "Cairo",
       "id": 5
+    },
+    {
+      "name": "cheeseburger",
+      "price": "25",
+      "img": "cheeseburger.png",
+      "subgroup": "Burger",
+      "group": "Food",
+      "menu": "Ramadan",
+      "branch": "Cairo",
+      "id": 6
+    },
+    {
+      "name": "margherita",
+      "price": "60",
+      "img": "margherita.png",
+      "subgroup": "Pizaa",
+      "group": "Food",
+      "menu": "Ramadan",
+      "branch": "Cairo",
+      "id": 7
+    },
+    {
+      "name": "7up",
+      "price": "5",
+      "img": "7up.png",
+      "subgroup": "Cold Drinks",
+      "group": "BAV",
+      "menu": "Ramadan",
+      "branch": "Cairo",
+      "id": 9
+    },
+    {
+      "name": "icecream coffee",
+      "price": "30",
+      "img": "icecream coffee.png",
+      "subgroup": "Cold Drinks",
+      "group": "BAV",
+      "menu": "Ramadan",
+      "branch": "Cairo",
+      "id": 10
+    },
+    {
+      "name": "coca-cola",
+      "price": "5",
+      "img": "coca-cola.png",
+      "subgroup": "Cold Drinks",
+      "group": "BAV",
+      "menu": "Ramadan",
+      "branch": "Cairo",
+      "id": 11
     }
   ]
 }

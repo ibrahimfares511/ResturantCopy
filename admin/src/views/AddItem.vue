@@ -129,9 +129,9 @@
                 <label
                   for="item-image"
                   class="label-img"
-                  :class="[pathImg != null ? 'fill' : '']"
+                  :class="[uploadpath != null ? 'fill' : '']"
                   :style="{
-                    'background-image': `url(${pathImg})`,
+                    'background-image': `url(${uploadpath})`,
                   }"
                 ></label>
               </div>
@@ -140,54 +140,86 @@
               <button class="btn btn-success" @click="saveItem()">Save</button>
             </div>
           </div>
-          <!-- <table class="table text-center mt-4 shadow">
+          <table class="table text-center mt-4 shadow align-middle">
             <thead class="table-dark">
               <tr>
                 <th>ID</th>
                 <th>Name</th>
                 <th>Price</th>
+                <th>img</th>
                 <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(subgroup, i) in allSubGroups" :key="i">
-                <td>{{ subgroup.id }}</td>
+              <tr v-for="(item, i) in allItems" :key="i">
+                <td>{{ item.id }}</td>
                 <td>
-                  <span v-if="editBtn !== subgroup.id">{{
-                    subgroup.name
-                  }}</span>
+                  <span v-if="editBtn !== item.id">{{ item.name }}</span>
                   <input
                     type="text"
-                    v-if="editBtn === subgroup.id"
-                    v-model="subgroup.name"
+                    v-if="editBtn === item.id"
+                    v-model="item.name"
                   />
+                </td>
+                <td>
+                  <span v-if="editBtn !== item.id">{{ item.price }}</span>
+                  <input
+                    type="number"
+                    v-if="editBtn === item.id"
+                    v-model="item.price"
+                  />
+                </td>
+
+                <td>
+                  <img
+                    :src="require(`@/assets/images/${item.img}`)"
+                    :alt="item.name"
+                    v-if="editBtn !== item.id"
+                  />
+                  <input
+                    type="file"
+                    accept="image/*"
+                    @change="uploadImage($event)"
+                    id="update-image"
+                    class="d-none"
+                    v-if="editBtn === item.id"
+                  />
+                  <label
+                    v-if="editBtn === item.id"
+                    for="update-image"
+                    class="label-img"
+                    :class="[updatepath != null ? 'fill' : '']"
+                    :style="{
+                      'background-image': `url('${updatepath}')`,
+                    }"
+                  ></label>
                 </td>
                 <td>
                   <button
                     class="btn btn-warning"
-                    v-if="editBtn !== subgroup.id"
-                    @click="changeEdit(subgroup.id)"
+                    v-if="editBtn !== item.id"
+                    @click="changeEdit(item.id, item.img)"
                   >
                     Edit
                   </button>
                   <button
                     class="btn btn-success btn-sm"
-                    v-if="editBtn === subgroup.id"
-                    @click="updateGroup(subgroup.id, subgroup.name)"
+                    v-if="editBtn === item.id"
+                    @click="updateItem(item.id, item.name, item.price)"
                   >
                     Save
                   </button>
                   <button
                     class="btn btn-danger btn-sm ms-1"
-                    v-if="editBtn === subgroup.id"
-                    @click="deleteGroup(subgroup.id, subgroup.name)"
+                    v-if="editBtn === item.id"
+                    @click="deletItem(item.id, item.name)"
                   >
                     Delete
                   </button>
                 </td>
               </tr>
             </tbody>
-          </table> -->
+          </table>
         </div>
       </div>
     </div>
@@ -208,7 +240,10 @@ export default {
       itemName: "",
       itemPrice: "",
       itemImg: "",
-      pathImg: null,
+      updateImg: "",
+      allItems: [],
+      uploadpath: null,
+      updatepath: null,
       editBtn: null,
     };
   },
@@ -226,10 +261,16 @@ export default {
       const image = e.target.files[0];
       const reader = new FileReader();
       reader.readAsDataURL(image);
-      reader.onload = (e) => {
-        this.pathImg = e.target.result;
+      reader.onload = (input) => {
+        console.log();
+        if (e.target.id === "item-image") {
+          this.uploadpath = input.target.result;
+          this.itemImg = image.name;
+        } else if (e.target.id === "update-image") {
+          this.updatepath = input.target.result;
+          this.updateImg = image.name;
+        }
       };
-      this.itemImg = image.name;
     },
     async saveItem() {
       if (
@@ -253,7 +294,7 @@ export default {
         if (result.status === 201) {
           this.itemName = "";
           this.itemPrice = "";
-          this.pathImg = null;
+          this.uploadpath = null;
           document.getElementById("item-image").value = "";
           this.$swal({
             position: "center-center",
@@ -262,6 +303,7 @@ export default {
             showConfirmButton: false,
             timer: 1500,
           });
+          this.getItems();
         }
       } else {
         this.$swal({
@@ -275,69 +317,74 @@ export default {
       let result = await axios.get(
         `http://localhost:3000/Item?branch=${this.selectBranch}&menu=${this.selectMenu}&subgroup=${this.selectSubGroup}`
       );
-      console.log(result);
+      if (result.status === 200) {
+        this.allItems = result.data;
+      }
     },
-    // changeEdit(index) {
-    //   this.editBtn = index;
-    // },
-    // async updateGroup(index, newName) {
-    //   if (newName !== "") {
-    //     let result = await axios.put(
-    //       `http://localhost:3000/subgroup/${index}`,
-    //       {
-    //         name: newName,
-    //         group: this.selectGroup,
-    //         menu: this.selectMenu,
-    //         branch: this.selectBranch,
-    //       }
-    //     );
-    //     if (result.status === 200) {
-    //       this.editBtn = null;
-    //       this.$swal({
-    //         position: "center-center",
-    //         title: "Your SubGroup Updated",
-    //         icon: "success",
-    //         showConfirmButton: false,
-    //         timer: 1500,
-    //       });
-    //     }
-    //   } else {
-    //     this.$swal({
-    //       position: "center-center",
-    //       icon: "error",
-    //       title: "Please Enter Your SubGroup",
-    //     });
-    //   }
-    // },
-    // deleteGroup(index, delSubGroup) {
-    //   this.$swal({
-    //     icon: "question",
-    //     title: `Do you want to Delete ${delSubGroup} SubGroup?`,
-    //     showCancelButton: true,
-    //     confirmButtonText: "Save",
-    //   }).then(async (result) => {
-    //     if (result.isConfirmed) {
-    //       let result = await axios.delete(
-    //         `http://localhost:3000/subgroup/${index}`
-    //       );
-    //       if (result.status === 200) {
-    //         this.editBtn = null;
-    //         this.$swal({
-    //           position: "center-center",
-    //           title: "Your SubGroup Deleted",
-    //           icon: "success",
-    //           showConfirmButton: false,
-    //           timer: 1500,
-    //         });
-    //         this.getAllSubGroups({
-    //           branchName: this.selectBranch,
-    //           menuName: this.selectMenu,
-    //           groupName: this.selectGroup,
-    //         });
-    //       }
-    //     }
-    //   });
-    // },
+    changeEdit(index, img) {
+      this.editBtn = index;
+      this.updatepath = require(`../assets/images/${img}`);
+      this.updateImg = img;
+    },
+    async updateItem(index, newName, newPrice) {
+      if (newName !== "" && newPrice !== "") {
+        let result = await axios.put(`http://localhost:3000/Item/${index}`, {
+          name: newName,
+          price: newPrice,
+          img: this.updateImg,
+          subgroup: this.selectSubGroup,
+          group: this.selectGroup,
+          menu: this.selectMenu,
+          branch: this.selectBranch,
+        });
+        if (result.status === 200) {
+          this.editBtn = null;
+          this.$swal({
+            position: "center-center",
+            title: "Your Item Updated",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          this.updatepath = null;
+          this.updateImg = "";
+          this.getItems();
+        }
+      } else {
+        this.$swal({
+          position: "center-center",
+          icon: "error",
+          title: "Please Enter Your Full Data",
+        });
+      }
+    },
+    deletItem(index, item) {
+      this.$swal({
+        icon: "question",
+        title: `Do you want to Delete ${item} Item?`,
+        showCancelButton: true,
+        confirmButtonText: "Save",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          let result = await axios.delete(
+            `http://localhost:3000/Item/${index}`
+          );
+          if (result.status === 200) {
+            this.editBtn = null;
+            this.updatepath = null;
+            this.updateImg = "";
+            this.$swal({
+              position: "center-center",
+              title: "Your Item Deleted",
+              icon: "success",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            this.getItems();
+          }
+        }
+      });
+    },
   },
   mounted() {
     this.getAllBranches();
@@ -356,6 +403,7 @@ export default {
   background-repeat: no-repeat;
   cursor: pointer;
 }
+
 .label-img::after {
   content: "+";
   position: absolute;
@@ -369,5 +417,10 @@ export default {
 }
 .label-img.fill::after {
   content: "";
+}
+td img,
+td .label-img {
+  width: 100px;
+  height: 100px;
 }
 </style>
