@@ -190,5 +190,22 @@
       "branch": "Cairo",
       "id": 11
     }
+  ],
+  "tables": [
+    {
+      "name": "table-01",
+      "hole": 1,
+      "id": 1
+    },
+    {
+      "name": "table-02",
+      "hole": 1,
+      "id": 2
+    },
+    {
+      "name": "table-03",
+      "hole": 1,
+      "id": 3
+    }
   ]
 }

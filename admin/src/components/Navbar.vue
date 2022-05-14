@@ -23,6 +23,9 @@
         <li>
           <router-link :to="{ name: 'AddItem' }"> Item </router-link>
         </li>
+        <li>
+          <router-link :to="{ name: 'AddTables' }"> Tables </router-link>
+        </li>
       </ul>
     </nav>
     <button class="toggle">Click</button>
