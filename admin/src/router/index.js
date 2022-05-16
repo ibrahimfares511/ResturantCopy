@@ -7,7 +7,6 @@ import AddGroup from "../views/AddGroup.vue";
 import AddSubGroup from "../views/AddSubGroup.vue";
 import AddItem from "../views/AddItem.vue";
 import AddTables from "../views/AddTables.vue";
-import Holes from "@/components/Holes.vue";
 
 Vue.use(VueRouter);
 
@@ -46,7 +45,6 @@ const routes = [
     path: "/add-table",
     name: "AddTables",
     component: AddTables,
-    children: [{ path: "/add-table/:name/:id", component: Holes, props: true }],
   },
 ];
 

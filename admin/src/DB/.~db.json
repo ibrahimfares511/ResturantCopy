@@ -213,11 +213,6 @@
   ],
   "holes": [
     {
-      "name": "Second",
-      "branch": "Zagazig",
-      "id": 6
-    },
-    {
       "name": "Third",
       "branch": "Zagazig",
       "id": 7
