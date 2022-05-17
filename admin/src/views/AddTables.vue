@@ -33,7 +33,9 @@
         </ul>
       </nav>
       <div class="all-tables">
-        <span class="hole-del" @click="deleteHole()">Delete</span>
+        <span class="hole-del" @click="deleteHole()" v-if="showDel">
+          <font-awesome-icon icon="fa-solid fa-trash-can" />
+        </span>
         <div
           class="resTable"
           v-for="(table, i) in tables"
@@ -47,7 +49,7 @@
             v-show="delTable == table.id"
             @click.stop="deleteTable(table.id, table.name)"
           >
-            Delete
+            <font-awesome-icon icon="fa-solid fa-trash-can" />
           </button>
         </div>
       </div>
@@ -78,6 +80,7 @@ export default {
       selectHole: null,
       tables: [],
       delTable: null,
+      showDel: false,
     };
   },
   computed: {
@@ -94,6 +97,7 @@ export default {
         this.selectHole = result.data.length > 0 ? result.data[0].id : null;
         this.getTables();
       }
+      result.data.length > 0 ? (this.showDel = true) : (this.showDel = false);
     },
     deleteHole() {
       this.$swal({
@@ -200,12 +204,14 @@ export default {
 }
 .all-tables .hole-del {
   position: absolute;
-  top: -44px;
+  top: 0;
   right: 0;
   background: var(--bs-danger);
   color: white;
-  padding: 10px;
+  padding: 10px 15px;
   z-index: 2;
+  font-size: 1.3em;
+  cursor: pointer;
 }
 .all-tables .resTable {
   position: relative;
@@ -230,7 +236,7 @@ export default {
   right: 0;
   background: var(--bs-danger);
   color: white;
-  padding: 10px;
+  font-size: 2em;
   border: none;
 }
 </style>

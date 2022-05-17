@@ -1,6 +1,8 @@
 <template>
   <div class="setting" :class="isOpen ? 'open' : ''">
-    <button class="switch" @click="isOpen = !isOpen">gear</button>
+    <button class="switch" @click="isOpen = !isOpen">
+      <font-awesome-icon icon=" fa-solid fa-gears" />
+    </button>
     <div class="setting-content">
       <div class="add-holdes">
         <div class="form-group">
@@ -30,7 +32,7 @@
             v-model="tablesCount"
           />
         </div>
-        <div class="form-group">
+        <div class="form-group my-3">
           <label for="scema">Scema</label>
           <input
             type="text"
@@ -40,9 +42,14 @@
             v-model="scema"
           />
         </div>
-        <div class="form-group">
-          <input type="checkbox" v-model="circle" id="circle" />
-          <label for="circle">Circle</label>
+        <div class="form-check" style="margin: 0 35%">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            v-model="circle"
+            id="circle"
+          />
+          <label class="form-check-label" for="circle"> Circle </label>
         </div>
         <div class="d-grid mt-3">
           <button class="btn btn-success" @click="saveTables()">Save</button>
@@ -158,7 +165,8 @@ export default {
   transform: translateY(-50%);
   width: 35px;
   height: 35px;
-  text-align: end;
+  font-size: 1.3em;
+  text-align: center;
   background: #336ca6;
   color: #fff;
   border-radius: 10px 0 0 10px;
